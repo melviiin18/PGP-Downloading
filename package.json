@@ -1,10 +1,12 @@
 {
-	"name":"pgp-drrm",
-	"description":"PGP DRRM App",
-	"version":"0.0.1",
-	"private":true,
-	"dependencies":{
-		"express":"4.3.2",
-		"body-parser": "1.2.0"
-	}
+  "name": "pgp-drrm",
+  "description": "PGP DRRM App",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "1.2.0",
+    "express": "4.3.2",
+    "pg": "^4.2.0",
+    "randomstring": "^1.0.3"
+  }
 }

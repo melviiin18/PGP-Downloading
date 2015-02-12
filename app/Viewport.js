@@ -3,7 +3,7 @@ Ext.Loader.setConfig({
 disableCaching: false,
 enabled: true,
 paths: {   
-    PGP:'/App',
+    PGP:'/app',
 	GeoExt: "/lib/GeoExt",		
 	Ext: '/lib/extjs/src',
 	
@@ -13,13 +13,12 @@ paths: {
 Ext.application({
     name: 'OL3EXT4',	
 	requires:[
-		'PGP.mappanel','PGP.Transactions', 'PGP.AvailableLayers'
-		],
+		'PGP.MapPanel','PGP.Transactions', 'PGP.AvailableLayers'
+	],
     launch: function () {
 	
-		
-		var MapPanel= Ext.create('PGP.mappanel');	 				
-		var Trans= Ext.create('PGP.Transactions');	 		
+		var MapPanel= Ext.create('PGP.MapPanel');	 				
+		var Trans= Ext.create('PGP.Transactions', { itemId: 'transactionPanel' });	 		
 		var AvailableLayers= Ext.create('PGP.AvailableLayers');	 		
 		
 		

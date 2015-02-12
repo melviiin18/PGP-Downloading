@@ -1,6 +1,6 @@
 
 
-Ext.define('PGP.mappanel',{
+Ext.define('PGP.MapPanel',{
 	extend:'GeoExt.panel.Map',
 	alias:'Widget.mappanel',	
 	title: "Philippine Geoportal",   			
@@ -10,11 +10,34 @@ Ext.define('PGP.mappanel',{
 	width:100,
 	height:100,
 	buildButtons:function(){
-	return[{
-			xtype:'button',
-			text:'Add to List'
+		var me = this;
+		return [
+			{
+				xtype:'button',
+				text:'Add to List',
+				handler: function(){
+					var trans = me.ownerCt.down('#transactionPanel');
+					var record = trans.getSelectedRecord();
+
+					//TODO: get actual layer data like name and current map bounds
+					var layers = record.get('layers');
+					layers = (layers ? Ext.decode(layers) : []);
+					
+					if(layers) {
+						//==========================
+						
+						layers.push({layer:'new-layer-' + (new Date()).getTime(), bounds:[1,1,1,1]});
+						alert("Adding layer simulated!");
+						
+						//==========================
+						trans.updateGrid(layers);
+						layers = JSON.stringify(layers);
+						record.set('layers', layers);
+						
+					}
+				}
 			}
-		
+			
 		]
 	},
 	buildItems:function(){	
