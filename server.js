@@ -174,3 +174,17 @@ function query(sql, params, callback){
 function MultilineWrapper(f){
 	return (f.toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]).trim();
 }
+
+
+//=============== CORS-ANYWHERE ===============//
+
+var host = process.env.PORT ? '0.0.0.0' : '127.0.0.1';
+var port = process.env.PORT || 3000;
+var cors_proxy = require('cors-anywhere');
+cors_proxy.createServer({
+    //requireHeader: ['origin' 'x-requested-with'],
+   // removeHeaders: ['cookie', 'cookie2']
+   
+}).listen(port, host, function() {
+    console.log('Running CORS Anywhere on ' + host + ':' + port);
+});   

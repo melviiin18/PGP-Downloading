@@ -44,7 +44,7 @@ Ext.define('PGP.MapPanel',{
 	},	
 	initComponent:function(){				
 		var popup, me=this 			
-		console.log(me);
+		
 		map = new OpenLayers.Map(				
 				{ 
 				controls: [

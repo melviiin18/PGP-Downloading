@@ -13,7 +13,7 @@ paths: {
 Ext.application({
     name: 'OL3EXT4',	
 	requires:[
-		'PGP.MapPanel','PGP.Transactions', 'PGP.AvailableLayers'
+		'PGP.MapPanel','PGP.Transactions', 'PGP.AvailableLayers', 'PGP.Layer'
 	],
     launch: function () {
 	
