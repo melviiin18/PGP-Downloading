@@ -16,7 +16,11 @@ Ext.define('PGP.MapPanel',{
 				xtype:'button',
 				text:'Add to List',
 				handler: function(){
+				
+					
 					var trans = me.ownerCt.down('#transactionPanel');
+					var layersPanel = me.ownerCt.down('#layersPanel');
+
 					var record = trans.getSelectedRecord();
 
 					//TODO: get actual layer data like name and current map bounds
@@ -26,8 +30,7 @@ Ext.define('PGP.MapPanel',{
 					if(layers) {
 						//==========================
 						
-						layers.push({layer:'new-layer-' + (new Date()).getTime(), bounds:[1,1,1,1]});
-						alert("Adding layer simulated!");
+						layers.push({layer: layersPanel.getSelectedLayer(), bounds: me.map.getExtent().toString() });
 						
 						//==========================
 						trans.updateGrid(layers);
@@ -43,7 +46,7 @@ Ext.define('PGP.MapPanel',{
 	buildItems:function(){	
 	},	
 	initComponent:function(){				
-		var popup, me=this 			
+		var popup, me=this;		
 		
 		map = new OpenLayers.Map(				
 				{ 
@@ -59,7 +62,8 @@ Ext.define('PGP.MapPanel',{
 				fallThrough: true,							
 				projection: 'EPSG:900913'
 				
-		});		
+		});
+		me.map = map;
 		        
        var pgp_basemap_cache = new OpenLayers.Layer.NAMRIA(
 				'NAMRIA Basemap',
@@ -83,7 +87,7 @@ Ext.define('PGP.MapPanel',{
 		});		
 		
 		this.callParent(arguments);   
-    }	
+    }
 	
 	
 });

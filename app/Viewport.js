@@ -19,7 +19,7 @@ Ext.application({
 	
 		var MapPanel= Ext.create('PGP.MapPanel');	 				
 		var Trans= Ext.create('PGP.Transactions', { itemId: 'transactionPanel' });	 		
-		var AvailableLayers= Ext.create('PGP.AvailableLayers');	 		
+		var AvailableLayers= Ext.create('PGP.AvailableLayers', { itemId: 'layersPanel' });	 		
 		
 		
         Ext.create('Ext.container.Viewport', {	
