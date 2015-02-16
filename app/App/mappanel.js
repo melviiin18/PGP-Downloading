@@ -16,8 +16,7 @@ Ext.define('PGP.MapPanel',{
 				xtype:'button',
 				text:'Add to List',
 				handler: function(){
-				
-					
+
 					var trans = me.ownerCt.down('#transactionPanel');
 					var layersPanel = me.ownerCt.down('#layersPanel');
 
@@ -29,8 +28,8 @@ Ext.define('PGP.MapPanel',{
 					
 					if(layers) {
 						//==========================
-						
-						layers.push({layer: layersPanel.getSelectedLayer(), bounds: me.map.getExtent().toString() });
+						var bounds = me.map.getExtent().transform('EPSG:900913','EPSG:4326').toString();
+						layers.push({layer: layersPanel.getSelectedLayer(), bounds:bounds });
 						
 						//==========================
 						trans.updateGrid(layers);

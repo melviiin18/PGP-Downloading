@@ -1,23 +1,27 @@
 //=============== FROM CLI PARAMETER ===============//
 var pg_user = process.argv[2];
 var pg_password = process.argv[3];
+var ENV = process.argv[4];
 
 if(!pg_user) {
 	console.log("Postgres user name is required. Terminating.")
 	process.exit(0);
-} else if(!pg_password){
+}
+if(!pg_password){
 	console.log("Postgres user password is required. Terminating.")
 	process.exit(0);
-} else {
-	// we're good to go. proceed.
-}
+} 
 
+if(!ENV){
+	console.log("Environment settings ENV is required. Terminating.")
+	process.exit(0);
+} 
 
 
 //=============== SETTINGS ===============//
 
 //var ENV = 'SERVERS_SA_5';
-var ENV = 'LAPTOP';
+//var ENV = 'LAPTOP';
 
 var SETTINGS = {
 	SERVERS_SA_5:{

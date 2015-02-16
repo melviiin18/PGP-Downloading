@@ -4,9 +4,9 @@
 
 CREATE TABLE configuration.transactions
 (
+  passcode character(6) NOT NULL,
   date_requested date,
   expiration_date date,
-  passcode character(6) NOT NULL,
   contact_person character(100),
   agency character(50),
   layers text,
