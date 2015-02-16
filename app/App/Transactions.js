@@ -7,17 +7,23 @@ Ext.define('PGP.Transactions',{
 	collapsible:true,
 	initComponent:function(){	
 	
-		this.items = this.buildItems();
-		this.buttons = this.buildButtons();
+		this.items = this.buildItems();		
 		this.callParent();	
 	},	
 	buildItems:function(){
 		return[{		
 				xtype:'panel',
-				title:'Transactions',
-				height:200,
-				items:[
+				title:'Transactions',				
+				height:200,			
+				tools:[
 					{
+					  xtype: 'button',
+					  text: 'add'						
+					}
+				],
+				items:[
+					
+					{					
 						xtype: 'grid',
 						width:502.1,
 						height:260, 
@@ -68,6 +74,17 @@ Ext.define('PGP.Transactions',{
 			  {
 				xtype:'form',				
 				title:'Transaction Details',
+				tools:[
+				  {
+					xtype:'button',
+					text:'Save',		
+					handler:function(){					
+						var form = this.up('Trans').down('form');
+						var record = form.getRecord();
+						form.updateRecord(record);
+					}	
+				  }
+				],
 				height:400,
 				items:[
 						{
@@ -122,18 +139,6 @@ Ext.define('PGP.Transactions',{
 			  
 			  
 			];				
-	},
-	buildButtons:function(){
-		return[{
-			xtype:'button',
-			text:'Save',		
-			handler:function(){					
-				var form = this.up('Trans').down('form');
-				var record = form.getRecord();
-				form.updateRecord(record);
-			}	
-		}
-		];
 	},
 	getSelectedRecord: function(){
 		return this.down('form').getRecord();	

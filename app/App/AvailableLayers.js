@@ -4,9 +4,31 @@ Ext.define('PGP.AvailableLayers', {
 	width:300, 	
 	title: 'Available layers',
 	region: 'east',	
-	split: true,
-	
+	split: true,	
+	mappanel:'',
 	title: 'Available Layers',
+	loadLayer:function(layer_name){
+		
+		//display one layer at a time
+		if (this.mappanel.map.getNumLayers()>1){			
+			this.mappanel.map.removeLayer(this.mappanel.map.layers[1])
+		}
+		
+		//load selected layer
+		 var sel_layer = new OpenLayers.Layer.WMS(
+			layer_name,
+			'http://geoserver.namria.gov.ph/geoserver/geoportal/wms',
+			{
+				layers:layer_name,					
+				transparent:true						
+			},
+			{					
+				opacity:.7,				
+			}
+	    )				
+		this.mappanel.map.addLayer(sel_layer);	
+		
+	},
 	buildItems:function(){
 		return[
 				{ 			 
@@ -16,27 +38,28 @@ Ext.define('PGP.AvailableLayers', {
 				   padding:'10 50 10 10',	
 				   height:25,	
 				   listeners:{
-				   change: function(){
-								
-						var me = this.up().down('#Tpanel')
-						
-						var value = this.getValue();
-						if (!value || value == '') {
-							return;
-						}
-						me.store.clearFilter(true);
-						me.store.filterBy(function(record,id){
-							var stringToMatch = (
-								record.get('title') + '|' + 
-								record.get('description') +  '|' + 
-								record.get('tags') +  '|' + 
-								record.get('agency')).toLowerCase();
+					   change: function(){
+									
+							var me = this.up().down('#Tpanel')
 							
-							var match = (stringToMatch.indexOf(value.toLowerCase()) >= 0 );
-							return match; 
-						}); 
-				   
-				   }}
+							var value = this.getValue();
+							if (!value || value == '') {
+								return;
+							}
+							me.store.clearFilter(true);
+							me.store.filterBy(function(record,id){
+								var stringToMatch = (
+									record.get('title') + '|' + 
+									record.get('description') +  '|' + 
+									record.get('tags') +  '|' + 
+									record.get('agency')).toLowerCase();
+								
+								var match = (stringToMatch.indexOf(value.toLowerCase()) >= 0 );
+								return match; 
+							}); 
+					   
+					   }}
+					  
 			    },	
 			    {
 					xtype: 'treepanel',
@@ -45,7 +68,14 @@ Ext.define('PGP.AvailableLayers', {
 					store: Ext.data.StoreManager.lookup('layer_List'),						
 					border: false,
 					rootVisible: false,
-					autoScroll: true
+					autoScroll: true,
+					listeners:{
+						 itemclick:function(s,r){
+							var me = this.up();
+							me.loadLayer(r.data.layer_name);							
+					     }
+					
+					}
 				}	 
 			 
 		    ]	
@@ -76,11 +106,8 @@ Ext.define('PGP.AvailableLayers', {
 		
 		this.items=this.buildItems();
 		this.callParent(arguments);
-	},
-	getSelectedLayer: function(){
-		var selection = this.down('#Tpanel').getSelection();
-		return (selection.length > 0 ? selection[0].get('layer_name') : null);
 	}
+	
 });
 
 

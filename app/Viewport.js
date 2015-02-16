@@ -18,8 +18,8 @@ Ext.application({
     launch: function () {
 	
 		var MapPanel= Ext.create('PGP.MapPanel');	 				
-		var Trans= Ext.create('PGP.Transactions', { itemId: 'transactionPanel' });	 		
-		var AvailableLayers= Ext.create('PGP.AvailableLayers', { itemId: 'layersPanel' });	 		
+		var Trans= Ext.create('PGP.Transactions', { itemId: 'transactionPanel'});	 		
+		var AvailableLayers= Ext.create('PGP.AvailableLayers', { itemId: 'layersPanel',mappanel:MapPanel });	 		
 		
 		
         Ext.create('Ext.container.Viewport', {	
